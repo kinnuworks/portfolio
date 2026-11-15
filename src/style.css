@@ -48,3 +48,15 @@ pre code { display: block; min-width: max-content; }
 .proof { margin: 0 0 24px; }
 .proof figcaption { font-size: 0.9rem; color: var(--soft); margin-top: 8px; }
 @media (max-width: 600px) { h1 { margin-top: 28px; } h2 { margin-top: 48px; } body { font-size: 16px; } }
+/* Motion with one job: when a clause opens, the lines that stop the AI light up in order,
+   top to bottom, so the eye lands on the rule. Transform only; off for reduced motion. */
+code { position: relative; z-index: 0; }
+.ln { position: relative; }
+.ln.hot { background: none; }
+.ln.hot::before { content: ""; position: absolute; inset: 0; background: var(--hot); z-index: -1; transform-origin: left center; }
+@media (prefers-reduced-motion: no-preference) {
+  details[open] .ln.hot::before, .proof .ln.hot::before { animation: mark 320ms cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--i, 0) * 45ms); }
+}
+@keyframes mark { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.via { border-left: 3px solid var(--ink); padding: 2px 0 2px 12px; margin: 16px 0 0; }
+.rest .built { font-size: 0.9rem; }

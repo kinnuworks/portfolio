@@ -1,5 +1,5 @@
 // Builds the static site from content/*.json into dist/. No dependencies, no client framework.
-import { readFileSync, writeFileSync, mkdirSync, rmSync, statSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, rmSync, statSync, readdirSync, copyFileSync } from "node:fs";
 import { join } from "node:path";
 
 const root = new URL(".", import.meta.url).pathname;
@@ -20,12 +20,13 @@ function codeBlock(p, pad = 0) {
   const all = readFileSync(join(root, "content", "code", `${p.cache}.full`), "utf8").split("\n");
   const hot = (n) => p.ranges.some(([a, b]) => n >= a && n <= b);
   const rows = [];
+  let k = 0;
   p.ranges.forEach(([a, b], i) => {
     const from = Math.max(1, a - pad);
     const to = Math.min(all.length, b + pad);
     if (i > 0) rows.push(`<span class="ln gap"><span class="no" aria-hidden="true">⋮</span></span>`);
     for (let n = from; n <= to; n++) {
-      rows.push(`<span class="ln${hot(n) ? " hot" : ""}"><span class="no" aria-hidden="true">${n}</span>${esc(all[n - 1]) || " "}</span>`);
+      rows.push(`<span class="ln${hot(n) ? " hot" : ""}"${hot(n) ? ` style="--i:${Math.min(k++, 10)}"` : ""}><span class="no" aria-hidden="true">${n}</span>${esc(all[n - 1]) || " "}</span>`);
     }
   });
   const spans = p.ranges.map(([a, b]) => `${a}–${b}`).join(" and ");
@@ -82,6 +83,10 @@ function page({ title, description, path, body }) {
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:type" content="website">
+<meta property="og:image" content="${BASE}/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23fff' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
 <style>${css}</style>
@@ -106,7 +111,7 @@ function heroProof(p) {
   const line = readFileSync(join(root, "content", "code", `${p.cache}.full`), "utf8").split("\n")[p.heroLine - 1].trim();
   const url = `https://github.com/kinnuworks/${p.repo}/blob/${p.sha}/${p.path}#L${p.heroLine}`;
   return `<figure class="proof">
-<pre tabindex="0" aria-label="${esc(p.path)}, line ${p.heroLine}"><code><span class="ln hot"><span class="no" aria-hidden="true">${p.heroLine}</span>${esc(line)}</span></code></pre>
+<pre tabindex="0" aria-label="${esc(p.path)}, line ${p.heroLine}"><code><span class="ln hot" style="--i:4"><span class="no" aria-hidden="true">${p.heroLine}</span>${esc(line)}</span></code></pre>
 <figcaption>${esc(p.heroCaption)} <a href="${url}">${esc(p.path)}, line ${p.heroLine}</a></figcaption>
 </figure>`;
 }
@@ -120,6 +125,8 @@ const home = page({
 ${heroFrom ? heroProof(heroFrom) : ""}
 <p class="intro">${esc(site.intro)}</p>
 <p class="howto">${esc(site.howto)}</p>
+<p class="via" id="via" hidden></p>
+<script>(function(){try{var m=document.cookie.match(/(?:^|; )ow_a=([^;]+)/);if(!m)return;var a=decodeURIComponent(m[1]).replace(/[^\\w .-]/g,"").replace(/[-_]+/g," ").trim();if(!a)return;a=a.charAt(0).toUpperCase()+a.slice(1);var el=document.getElementById("via");el.textContent=${JSON.stringify(site.via)}.replace("{app}",a);el.hidden=false;}catch(e){}})();</script>
 </section>
 <section aria-labelledby="featured-h">
 <h2 id="featured-h">${esc(site.featuredHeading)}</h2>
@@ -131,7 +138,7 @@ ${featured.map(clause).join("\n")}
 <h2 id="rest-h">${esc(site.restHeading)}</h2>
 <p class="sub">${esc(site.restIntro)}</p>
 <ul class="rest">
-${products.map((p) => `<li><h3>${esc(p.name)}</h3><p>${esc(p.what)}</p><p class="links">${links(p)}</p></li>`).join("\n")}
+${products.map((p) => `<li><h3>${esc(p.name)}</h3><p>${esc(p.what)}</p>${p.builtFor ? `<p class="built">Built for ${esc(p.builtFor)}</p>` : ""}<p class="links">${links(p)}</p></li>`).join("\n")}
 </ul>
 </section>
 <section aria-labelledby="outside-h">
@@ -180,6 +187,7 @@ for (const [f, html] of files) writeFileSync(join(out, f), html);
 const size = (dir) => readdirSync(dir, { withFileTypes: true }).reduce((n, e) => n + (e.isDirectory() ? size(join(dir, e.name)) : statSync(join(dir, e.name)).size), 0);
 const kb = Math.round(size(out) / 1024);
 for (const [f, html] of files) writeFileSync(join(out, f), html.replace("__KB__", kb));
+copyFileSync(join(root, "src", "og.png"), join(out, "og.png"));
 writeFileSync(join(out, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${BASE}/sitemap.xml\n`);
 writeFileSync(join(out, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${["/", ...featured.map((p) => `/work/${p.slug}`)].map((u) => `<url><loc>${BASE}${u}</loc></url>`).join("\n")}\n</urlset>\n`);
 console.log(`built ${files.length} pages, ${kb} KB`);
