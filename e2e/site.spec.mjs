@@ -84,3 +84,12 @@ test("reduced motion: no animations or transitions run", async ({ page }) => {
   }).length);
   expect(moving).toBe(0);
 });
+
+test("the first screen shows a real line of code, not only words", async ({ page }) => {
+  await page.goto("/");
+  const pre = page.locator(".hero pre").first();
+  await expect(pre).toBeInViewport();
+  const n = featured.find((p) => p.heroLine);
+  const line = readFileSync(`content/code/${n.cache}.full`, "utf8").split("\n")[n.heroLine - 1].trim();
+  await expect(pre).toContainText(line);
+});
