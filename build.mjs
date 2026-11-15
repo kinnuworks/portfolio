@@ -104,7 +104,7 @@ ${body}
 <p>Acadable's manifesto says: <q>${esc(site.colophonRule)}</q>. <a href="${site.colophonSource}">Read it</a>.</p>
 <p>${esc(site.footerBuilt).replace("{kb}", "__KB__")}</p>
 </footer>
-<script>(function(){function o(){var h=decodeURIComponent(location.hash.slice(1));if(!h)return;var el=document.getElementById(h);var d=el&&el.querySelector("details");if(d)d.open=true;}o();addEventListener("hashchange",o);})();</script>
+<script>(function(){var st=(location.search.match(/[?&]state=([\\w-]+)/)||[])[1];if(st==="open"||st==="closed")document.querySelectorAll("details").forEach(function(d){d.open=st==="open";});function o(){var h=decodeURIComponent(location.hash.slice(1));if(!h)return;var el=document.getElementById(h);var d=el&&el.querySelector("details");if(d)d.open=true;}o();addEventListener("hashchange",o);})();</script>
 </body>
 </html>
 `;
@@ -130,7 +130,7 @@ ${heroFrom ? heroProof(heroFrom) : ""}
 <p class="intro">${esc(site.intro)}</p>
 <p class="howto">${esc(site.howto)}</p>
 <p class="via" id="via" role="note" hidden></p>
-<script>(function(){try{var m=document.cookie.match(/(?:^|; )ow_a=([^;]+)/);if(!m)return;var a=decodeURIComponent(m[1]).replace(/[^\\p{L}\\p{N} ._-]/gu,"").replace(/[-_]+/g," ").trim();if(!a)return;a=a.charAt(0).toUpperCase()+a.slice(1);var el=document.getElementById("via");el.textContent=${JSON.stringify(site.via)}.replace("{app}",a);el.hidden=false;}catch(e){}})();</script>
+<script>(function(){try{var m=document.cookie.match(/(?:^|; )ow_a=([^;]+)/);if(/[?&]state=via\\b/.test(location.search))m=[0,"unstop"];if(!m)return;var a=decodeURIComponent(m[1]).replace(/[^\\p{L}\\p{N} ._-]/gu,"").replace(/[-_]+/g," ").trim();if(!a)return;a=a.charAt(0).toUpperCase()+a.slice(1);var el=document.getElementById("via");el.textContent=${JSON.stringify(site.via)}.replace("{app}",a);el.hidden=false;}catch(e){}})();</script>
 </section>
 <section aria-labelledby="featured-h">
 <h2 id="featured-h">${esc(site.featuredHeading)}</h2>
