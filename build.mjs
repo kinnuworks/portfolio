@@ -137,7 +137,7 @@ function heroProof(p) {
 function on(k){return g.querySelector('[data-k="'+k+'"]').getAttribute("aria-pressed")==="true";}
 function run(){var need=on("sev")?2:1,names=(on("p1")?1:0)+(on("p2")?1:0),ok=names>=need;
 st.dataset.state=ok?"released":"held";
-out.textContent=(ok?"Released: ":"Held: ")+names+" of "+need+" named "+(need===1?"person":"people")+(on("ai")&&!ok?". The AI's approval doesn't count.":".");
+out.textContent=(ok?"Released: ":"Held: ")+names+" named "+(names===1?"person":"people")+" approved, "+need+" needed."+(on("ai")&&!ok?" The AI's approval doesn't count.":"");
 code.classList.remove("eval");void code.offsetWidth;code.classList.add("eval");}
 g.addEventListener("click",function(e){var b=e.target.closest(".key");if(!b)return;b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")==="true"?"false":"true");run();});
 run();code.classList.remove("eval");})();</script>
