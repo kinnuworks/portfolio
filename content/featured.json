@@ -1,0 +1,210 @@
+[
+  {
+    "slug": "invoiceguard",
+    "name": "InvoiceGuard",
+    "clause": "checks a supplier's invoice before any money moves, then asks a person twice",
+    "what": "An agent that reads a supplier's invoice, checks the payment quote against it, and pays through HashKey's payment gateway only after a person approves.",
+    "repo": "catch-fake-invoices",
+    "sha": "36c995215734e4fd66330a5fc3871144ca7f7884",
+    "path": "app/lib/flow.ts",
+    "lines": [
+      58,
+      65
+    ],
+    "question": "The payment quote names a different pay-to address than the invoice. What happens?",
+    "answer": "It stops before anyone is even asked. payOrder checks that the prepared quote pays the invoice's address and stays within its amount, and on a mismatch it returns quote-mismatch without signing or submitting anything. When they match, a person still has to say yes twice: once before the payment is signed and once before it is submitted.",
+    "caveat": "The approval is a function the app passes in. In the demo it is a button, but code that calls payOrder directly could pass one that always says yes.",
+    "live": "https://useinvoiceguard.vercel.app",
+    "video": "https://youtu.be/I7WhzoVGQ6w",
+    "builtFor": "HSK Horizon Hackathon India, Agent Payments & A2A Settlement track",
+    "cache": "invoiceguard",
+    "branch": "main",
+    "ranges": [
+      [
+        58,
+        65
+      ]
+    ],
+    "confirmed": false
+  },
+  {
+    "slug": "nadhir",
+    "name": "Nadhir",
+    "clause": "lets AI draft a public warning, but never release it",
+    "what": "AI drafts an emergency alert in the official CAP format, and a rule check holds it until named people approve it.",
+    "repo": "nadhir",
+    "sha": "61cf6ecafeb9c04bf352935db2fc3691809c1dd6",
+    "path": "nadhir/gate.py",
+    "lines": [
+      121,
+      153
+    ],
+    "question": "A live Severe flood alert has one human approver and one AI approver. Does it go out?",
+    "answer": "No. Only named approvals that aren't marked as AI count, and one person counts once, so a live Extreme or Severe alert needs two different people. At review time the check shows as pending. At release it fails, so the alert is held.",
+    "caveat": "Release in the demo writes to an audit log. No real alert network is connected.",
+    "live": "https://nadhir-gilt.vercel.app",
+    "video": null,
+    "builtFor": "ITU AI for Good, UAE",
+    "cache": "nadhir",
+    "branch": "main",
+    "ranges": [
+      [
+        121,
+        123
+      ],
+      [
+        145,
+        153
+      ]
+    ],
+    "confirmed": false
+  },
+  {
+    "slug": "concord",
+    "name": "Concord",
+    "clause": "won't show a medicine picture card until two other models read it back correctly",
+    "what": "Turns a hospital discharge sheet into picture cards a patient can follow without reading, in 70 languages.",
+    "repo": "concord",
+    "sha": "5fcbfbd2c6665a8d0c7e051118987328a1b6214e",
+    "path": "src/lib/gate.ts",
+    "lines": [
+      39,
+      66
+    ],
+    "question": "One reader model sees two tablets on the card and the other sees three. What does the patient get?",
+    "answer": "Not that picture. Both readers have to get every fact right, or the card is redrawn with a hint about what to fix. After three tries it falls back to a plain card drawn straight from the facts, so a wrong picture never reaches the patient.",
+    "caveat": "The two readers are themselves models. They catch a picture that is easy to misread; they do not prove a patient will read it correctly.",
+    "live": "https://concord-health.vercel.app",
+    "video": null,
+    "builtFor": "Banana Hacks 2026 (image AI)",
+    "cache": "concord",
+    "branch": "main",
+    "ranges": [
+      [
+        39,
+        43
+      ],
+      [
+        55,
+        66
+      ]
+    ],
+    "confirmed": false
+  },
+  {
+    "slug": "tollgate",
+    "name": "Tollgate",
+    "clause": "stops an AI answer the moment you stop paying for it",
+    "what": "Pay for an AI answer as it streams, in small USDC payments on Solana. Stop paying and the text stops.",
+    "repo": "tollgate",
+    "sha": "c972614f87df6364519512eaa672c0fcc74e2578",
+    "path": "app/server.mjs",
+    "lines": [
+      103,
+      111
+    ],
+    "question": "You have paid for 100 tokens and the model has already written 300. What reaches you?",
+    "answer": "About 100 tokens of text. The server keeps the model's output in a buffer and only sends the characters covered by vouchers paid since this answer started. The rest waits for the next voucher, or never arrives.",
+    "caveat": "Tokens are counted as a fixed number of characters, so the cut-off is close to the paid amount, not exact.",
+    "live": null,
+    "video": "https://youtu.be/XxHqkIbsHrI",
+    "builtFor": "MLH x Solana Hackathon, November 2026",
+    "cache": "tollgate",
+    "branch": "main",
+    "ranges": [
+      [
+        103,
+        111
+      ]
+    ],
+    "confirmed": false
+  },
+  {
+    "slug": "second-look",
+    "name": "Second Look",
+    "clause": "lets fixed evidence rules, not the model, decide whether a message is a scam",
+    "what": "Paste a suspicious message. Open-weight models collect the evidence, and a fixed score says whether it is a scam.",
+    "repo": "second-look",
+    "sha": "3280b7da942c7555c9c38f85cf679a3952216dcb",
+    "path": "src/lib/score.ts",
+    "lines": [
+      26,
+      34
+    ],
+    "question": "The model is sure the message is a scam, but none of the evidence flags fired. What verdict do you get?",
+    "answer": "Looks genuine. The model only gathers evidence. The score is the sum of fixed weights for the flags that fired, and the verdict comes from that number: 50 or more is likely a scam, 25 or more is suspicious.",
+    "caveat": "Telling the model to report only what is in the message is a prompt instruction. The scoring is plain code.",
+    "live": "https://second-look-phi.vercel.app",
+    "video": null,
+    "builtFor": "MozFest Developers Wilding (Mozilla.ai)",
+    "cache": "secondlook",
+    "branch": "otari-devs-wilding",
+    "ranges": [
+      [
+        26,
+        34
+      ]
+    ],
+    "confirmed": false
+  },
+  {
+    "slug": "ci-red-to-green",
+    "name": "ci-red-to-green",
+    "clause": "won't open a fix until the test fails twice before it and passes three times after",
+    "what": "A plugin for an AI coding agent: give it a red CI run, and it opens a pull request only when the fix is proven.",
+    "repo": "ci-red-to-green",
+    "sha": "1ac9fcbdd5e4e0d9173b1c3fc673967fc5732034",
+    "path": "ledger.py",
+    "lines": [
+      107,
+      149
+    ],
+    "question": "After the fix the test passes twice, then the fix is edited and it passes once more. Does a pull request open?",
+    "answer": "No. It needs three passing runs in a row after the change, and editing the fix starts the count again, so the ledger shows 1/3 passing runs and no pull request is opened.",
+    "caveat": "It also needs two failing runs before the change, so a test that failed only once is treated as not yet reproduced.",
+    "live": "https://kinnuworks.github.io/ci-red-to-green/",
+    "video": null,
+    "builtFor": "Hermes Agent Plugin Hackathon (Nous Research)",
+    "cache": "ciredtogreen",
+    "branch": "master",
+    "ranges": [
+      [
+        107,
+        115
+      ],
+      [
+        143,
+        149
+      ]
+    ],
+    "confirmed": false
+  },
+  {
+    "slug": "ticketwise",
+    "name": "Ticketwise",
+    "clause": "answers with a teammate's correction instead of a new guess",
+    "what": "A support agent that explains why a Sui transaction failed, and remembers the corrections the support team makes.",
+    "repo": "ticketwise",
+    "sha": "7282597d4e9fd590ed45c71002a339755ffa7ee9",
+    "path": "src/lib/memory.ts",
+    "lines": [
+      235,
+      246
+    ],
+    "question": "Last week a teammate corrected the answer for one failed transaction. A new ticket arrives with the same error from the same contract. Who answers?",
+    "answer": "The teammate. It recalls stored corrections and keeps only the ones with exactly the same failure key, which means the same error code in the same contract, then uses the newest. Only when nothing matches exactly does it search past cases by meaning.",
+    "caveat": "Remembering here means storing and looking up corrections. No model is retrained.",
+    "live": "https://ticketwise-gamma.vercel.app",
+    "video": null,
+    "builtFor": "Tatum x Walrus Total Recall",
+    "cache": "ticketwise",
+    "branch": "master",
+    "ranges": [
+      [
+        235,
+        246
+      ]
+    ],
+    "confirmed": false
+  }
+]

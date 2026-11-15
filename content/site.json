@@ -1,0 +1,23 @@
+{
+  "name": "Dhiraj Kavuri",
+  "first": "Dhiraj",
+  "hero": "Dhiraj Kavuri is one who builds AI that stops and asks.",
+  "intro": "I study data science at Simon Fraser University and build AI products for clients in the US. This year I shipped 30+ products at hackathons, on my own, and won prizes at 5 of them.",
+  "howto": "Each product below has one thing its AI is not allowed to decide. Open one to see the question I'd expect you to ask, my answer, and the lines of code that enforce it.",
+  "featuredHeading": "What the AI doesn't get to decide",
+  "restHeading": "Everything else I shipped this year",
+  "restIntro": "One line each. Open any of them to try it, read the code or watch the demo.",
+  "outsideHeading": "Outside hackathons",
+  "outside": [
+    {"title": "Client work", "text": "Since August 2023 I've built AI agents, LLM features and full-stack web apps for clients in the US. For one finance client I automated quarterly investor reporting: one click exports 40+ formatted PDFs per workbook across 18+ investor accounts, and it saves 6+ hours every reporting cycle."},
+    {"title": "Sonrise", "text": "An iPhone app I designed and built in SwiftUI, on the App Store with a subscription. It's an alarm that keeps ringing until you finish a small task.", "link": "https://apps.apple.com/app/id6793862471", "linkText": "Sonrise on the App Store"},
+    {"title": "Concord, published", "text": "Concord's image model and dataset are on Hugging Face with DOIs, and its technical report is on Zenodo.", "link": "https://doi.org/10.5281/zenodo.23346534", "linkText": "The Concord report"}
+  ],
+  "contactHeading": "Get in touch",
+  "contact": [
+    {"text": "GitHub", "href": "https://github.com/kinnuworks"},
+    {"text": "LinkedIn", "href": "https://www.linkedin.com/in/dhiraj-kavuri"}
+  ],
+  "colophonRule": "plain code for numbers, AI for language, people for decisions",
+  "colophonSource": "https://www.acadable.com/manifesto"
+}

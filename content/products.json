@@ -1,0 +1,240 @@
+[
+  {
+    "name": "Honest Server",
+    "what": "Checks Zcash light-wallet servers against full blocks from peers and shows where a server leaves things out.",
+    "live": null,
+    "repo": "honest-server",
+    "video": "https://youtu.be/UTLRoaX2uNE"
+  },
+  {
+    "name": "Lifeline",
+    "what": "Maps flood damage from free Sentinel-1 satellite radar and finds the villages a flood has cut off.",
+    "live": null,
+    "repo": "lifeline",
+    "video": "https://youtu.be/qGb5TOB1SoI"
+  },
+  {
+    "name": "Polygraph",
+    "what": "Checks a seller's signed claims against CreateOS's own records, then pays through Stripe machine payments.",
+    "live": null,
+    "repo": "polygraph",
+    "video": "https://youtu.be/FiD6RquSaj0"
+  },
+  {
+    "name": "Legal Tender",
+    "what": "A quantum money forgery game: a banknote whose serial number is eight qubits, built with Qiskit.",
+    "live": null,
+    "repo": "legal-tender",
+    "video": null
+  },
+  {
+    "name": "Sunflower",
+    "what": "Moves a running app to the computer with the cleanest power without dropping requests.",
+    "live": "https://kinnuworks.github.io/sunflower-enact/demo/",
+    "repo": "sunflower-enact",
+    "video": null
+  },
+  {
+    "name": "TrustDesk",
+    "what": "Answers security questionnaires from your own policies and sends anything they don't settle to the team that owns it.",
+    "live": "https://trustdesk-psi.vercel.app",
+    "repo": "trustdesk",
+    "video": null
+  },
+  {
+    "name": "Purse",
+    "what": "Locks a hackathon or bounty prize in a contract before the contest starts, so the pool can only go to named winners.",
+    "live": "https://purse-arc.vercel.app",
+    "repo": "purse",
+    "video": "https://youtu.be/Q8y04SuUvik"
+  },
+  {
+    "name": "Nightlist",
+    "what": "Re-checks a clinic's lung cancer patients every night against recruiting trials nearby.",
+    "live": null,
+    "repo": "nightlist",
+    "video": "https://youtu.be/LzP3DXNErWo"
+  },
+  {
+    "name": "Waymark",
+    "what": "Two volunteers map a building with their phones, then a blind visitor is guided through it by voice.",
+    "live": null,
+    "repo": "waymark",
+    "video": "https://youtu.be/w2s9TBhtiiI"
+  },
+  {
+    "name": "Second Marker",
+    "what": "Checks a marked CBSE answer book against the official marking scheme to find marks that were missed.",
+    "live": "https://second-marker.vercel.app",
+    "repo": "second-marker",
+    "video": null
+  },
+  {
+    "name": "Catch",
+    "what": "A Chrome extension where a local Gemma model reads the terms at a free-trial button and writes you an exit plan.",
+    "live": "https://kinnuworks.github.io/catch/",
+    "repo": "catch",
+    "video": "https://youtu.be/3MkDbNKn8Ng"
+  },
+  {
+    "name": "Kütle",
+    "what": "An EU battery passport for Turkish EV battery exporters, with a battery history that can't be quietly edited.",
+    "live": null,
+    "repo": "kutle",
+    "video": "https://youtu.be/kd-sNqu5z9E"
+  },
+  {
+    "name": "Accomplice",
+    "what": "A murder-mystery party game for Fire TV: phones are the controllers, the suspects are AI, and one friend secretly helps the killer.",
+    "live": null,
+    "repo": "accomplice",
+    "video": "https://youtu.be/TiMqMkAqtYM"
+  },
+  {
+    "name": "Raid",
+    "what": "Lets Cardano token communities claim Strike's markets by bringing in new traders who stay.",
+    "live": "https://raid-armies.vercel.app",
+    "repo": "raid",
+    "video": "https://youtu.be/5YkZwqSBHWY"
+  },
+  {
+    "name": "Quire",
+    "what": "A shared document editor with no server copy: edits are encrypted in the browser and stored on Arkiv.",
+    "live": "https://quire-five.vercel.app",
+    "repo": "quire",
+    "video": "https://youtu.be/H66nLomfLE4"
+  },
+  {
+    "name": "MuleNet",
+    "what": "Banks flag money-mule accounts together on Midnight with zero-knowledge proofs, without sharing customer data.",
+    "live": null,
+    "repo": "mulenet",
+    "video": "https://youtu.be/85G4pWLGQHw"
+  },
+  {
+    "name": "Fineprint",
+    "what": "Walks a Hugging Face model's family tree to list the licence terms it inherits.",
+    "live": null,
+    "repo": "fineprint",
+    "video": "https://youtu.be/GyyAkWWM_AA"
+  },
+  {
+    "name": "Ladder",
+    "what": "Approve once, and an AI works through a ladder of real-world steps, like cancelling a gym membership, within a set budget.",
+    "live": null,
+    "repo": "ladder",
+    "video": null
+  },
+  {
+    "name": "Bon Appétit",
+    "what": "Turns Swiss supermarket receipts into a picture of what a household eats, on your own computer, with Apertus.",
+    "live": "https://kinnuworks.github.io/bon-appetit/",
+    "repo": "bon-appetit",
+    "video": null
+  },
+  {
+    "name": "Stepwell",
+    "what": "First-loss cover for USDC in Morpho vaults on Arc: underwriters take losses before depositors do.",
+    "live": null,
+    "repo": "stepwell",
+    "video": "https://youtu.be/M_1gqJF5pig"
+  },
+  {
+    "name": "Brook",
+    "what": "A talking guide on your phone for OneAquaHealth's citizen stream check, in 7 languages.",
+    "live": "https://brook-oah.vercel.app",
+    "repo": "brook",
+    "video": "https://www.youtube.com/watch?v=fHfNSAoPz7I"
+  },
+  {
+    "name": "Whodunit",
+    "what": "Finds the commit that broke an AI agent, who asked for it and what it cost, by replaying the failing requests.",
+    "live": "https://kinnuworks.github.io/whodunit/",
+    "repo": "whodunit",
+    "video": null
+  },
+  {
+    "name": "Mealtime",
+    "what": "Plans a big meal backwards from dinner time and sends each cook their next step.",
+    "live": null,
+    "repo": "mealtime",
+    "video": null
+  },
+  {
+    "name": "Tablefolk",
+    "what": "AI characters for tabletop games that only know what was said in front of them.",
+    "live": null,
+    "repo": "tablefolk",
+    "video": null
+  },
+  {
+    "name": "Giftlink",
+    "what": "Send NIM as a link; whoever opens it claims the NIM into their Nimiq Pay wallet.",
+    "live": null,
+    "repo": "giftlink",
+    "video": null
+  },
+  {
+    "name": "Plumb",
+    "what": "A capped vault on Mezo that pays MUSD holders to keep a standing bid under MUSD.",
+    "live": null,
+    "repo": "plumb",
+    "video": null
+  },
+  {
+    "name": "Varde",
+    "what": "Researches Norwegian companies from their organisation numbers; every fact carries a source, a date and the quoted text.",
+    "live": null,
+    "repo": "varde",
+    "video": null
+  },
+  {
+    "name": "Which tests first",
+    "what": "A small Gemma model on a laptop reads the code graph and runs the test most likely to catch the bug first.",
+    "live": null,
+    "repo": "which-tests-first",
+    "video": null
+  },
+  {
+    "name": "Moose Test",
+    "what": "Runs open-source research agents on the same briefing and grades them from their own logs when the model or search breaks.",
+    "live": null,
+    "repo": "moose-test",
+    "video": null
+  },
+  {
+    "name": "Fallow",
+    "what": "A weekly rotation strategy across BTC, ETH and tokenised stocks, gold and Treasuries on Bitget.",
+    "live": "https://kinnuworks.github.io/fallow/",
+    "repo": "fallow",
+    "video": null
+  },
+  {
+    "name": "Foley",
+    "what": "Film a clip, make the sound with your mouth, tap where it goes, and a ComfyUI app adds the effect.",
+    "live": null,
+    "repo": "foley",
+    "video": null
+  },
+  {
+    "name": "FairShare",
+    "what": "Private aid coordination on Aptos, so agencies avoid paying the same family twice without sharing their lists.",
+    "live": null,
+    "repo": "fairshare",
+    "video": null
+  },
+  {
+    "name": "Penny Post",
+    "what": "A letterbox for every .skr name: one question a day, and the postage goes to the person reading it.",
+    "live": null,
+    "repo": "penny-post",
+    "video": null
+  },
+  {
+    "name": "Clausework",
+    "what": "Five coding-agent seats in one BAND room close every clause of a spec, each with evidence.",
+    "live": null,
+    "repo": "clausework",
+    "video": null
+  }
+]
