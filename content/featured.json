@@ -197,7 +197,7 @@
     "answer": "The teammate. It recalls stored corrections and keeps only the ones with exactly the same failure key, which means the same error code in the same contract, then uses the newest. Only when nothing matches exactly does it search past cases by meaning.",
     "caveat": "Remembering here means storing and looking up corrections. No model is retrained.",
     "live": "https://ticketwise-gamma.vercel.app",
-    "video": null,
+    "video": "https://youtu.be/ju1XZ-x7j0I",
     "builtFor": "Tatum x Walrus Total Recall",
     "cache": "ticketwise",
     "branch": "master",
