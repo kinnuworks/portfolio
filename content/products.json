@@ -4,42 +4,48 @@
     "what": "Checks Zcash light-wallet servers against full blocks from peers and shows where a server leaves things out.",
     "live": null,
     "repo": "honest-server",
-    "video": "https://youtu.be/UTLRoaX2uNE"
+    "video": "https://youtu.be/UTLRoaX2uNE",
+    "builtFor": "Zecathon"
   },
   {
     "name": "Lifeline",
     "what": "Maps flood damage from free Sentinel-1 satellite radar and finds the villages a flood has cut off.",
     "live": null,
     "repo": "lifeline",
-    "video": "https://youtu.be/qGb5TOB1SoI"
+    "video": "https://youtu.be/qGb5TOB1SoI",
+    "builtFor": "Multimodal AI Hackathon 2026, IIT Mandi"
   },
   {
     "name": "Polygraph",
     "what": "Checks a seller's signed claims against CreateOS's own records, then pays through Stripe machine payments.",
     "live": null,
     "repo": "polygraph",
-    "video": "https://youtu.be/FiD6RquSaj0"
+    "video": "https://youtu.be/FiD6RquSaj0",
+    "builtFor": "CreateOS x Stripe Projects hackathon"
   },
   {
     "name": "Legal Tender",
     "what": "A quantum money forgery game: a banknote whose serial number is eight qubits, built with Qiskit.",
     "live": null,
     "repo": "legal-tender",
-    "video": null
+    "video": null,
+    "builtFor": "Qollab x IonQ hackathon"
   },
   {
     "name": "Sunflower",
     "what": "Moves a running app to the computer with the cleanest power without dropping requests.",
     "live": "https://kinnuworks.github.io/sunflower-enact/demo/",
     "repo": "sunflower-enact",
-    "video": null
+    "video": null,
+    "builtFor": "Veles Hack 2026"
   },
   {
     "name": "TrustDesk",
     "what": "Answers security questionnaires from your own policies and sends anything they don't settle to the team that owns it.",
     "live": "https://trustdesk-psi.vercel.app",
     "repo": "trustdesk",
-    "video": null
+    "video": null,
+    "builtFor": "Clocked Build Challenge"
   },
   {
     "name": "Purse",
@@ -53,7 +59,8 @@
     "what": "Re-checks a clinic's lung cancer patients every night against recruiting trials nearby.",
     "live": null,
     "repo": "nightlist",
-    "video": "https://youtu.be/LzP3DXNErWo"
+    "video": "https://youtu.be/LzP3DXNErWo",
+    "builtFor": "Open Agent Hackathon 2026"
   },
   {
     "name": "Waymark",
@@ -67,7 +74,8 @@
     "what": "Checks a marked CBSE answer book against the official marking scheme to find marks that were missed.",
     "live": "https://second-marker.vercel.app",
     "repo": "second-marker",
-    "video": null
+    "video": null,
+    "builtFor": "Build With AI: Basics"
   },
   {
     "name": "Catch",
@@ -81,7 +89,8 @@
     "what": "An EU battery passport for Turkish EV battery exporters, with a battery history that can't be quietly edited.",
     "live": null,
     "repo": "kutle",
-    "video": "https://youtu.be/kd-sNqu5z9E"
+    "video": "https://youtu.be/kd-sNqu5z9E",
+    "builtFor": "IEEE ClimateChain Global Hackathon 2026"
   },
   {
     "name": "Accomplice",
@@ -95,14 +104,16 @@
     "what": "Lets Cardano token communities claim Strike's markets by bringing in new traders who stay.",
     "live": "https://raid-armies.vercel.app",
     "repo": "raid",
-    "video": "https://youtu.be/5YkZwqSBHWY"
+    "video": "https://youtu.be/5YkZwqSBHWY",
+    "builtFor": "Strike Hackathon"
   },
   {
     "name": "Quire",
     "what": "A shared document editor with no server copy: edits are encrypted in the browser and stored on Arkiv.",
     "live": "https://quire-five.vercel.app",
     "repo": "quire",
-    "video": "https://youtu.be/H66nLomfLE4"
+    "video": "https://youtu.be/H66nLomfLE4",
+    "builtFor": "Arkiv challenge"
   },
   {
     "name": "MuleNet",
@@ -123,14 +134,16 @@
     "what": "Approve once, and an AI works through a ladder of real-world steps, like cancelling a gym membership, within a set budget.",
     "live": null,
     "repo": "ladder",
-    "video": null
+    "video": null,
+    "builtFor": "PayBox Hackathon, Chapter 1"
   },
   {
     "name": "Bon Appétit",
     "what": "Turns Swiss supermarket receipts into a picture of what a household eats, on your own computer, with Apertus.",
     "live": "https://kinnuworks.github.io/bon-appetit/",
     "repo": "bon-appetit",
-    "video": null
+    "video": null,
+    "builtFor": "Hack Apertus 2026"
   },
   {
     "name": "Stepwell",
@@ -144,49 +157,56 @@
     "what": "A talking guide on your phone for OneAquaHealth's citizen stream check, in 7 languages.",
     "live": "https://brook-oah.vercel.app",
     "repo": "brook",
-    "video": "https://www.youtube.com/watch?v=fHfNSAoPz7I"
+    "video": "https://www.youtube.com/watch?v=fHfNSAoPz7I",
+    "builtFor": "OneAquaHealth IEEE Global Hackathon 2026"
   },
   {
     "name": "Whodunit",
     "what": "Finds the commit that broke an AI agent, who asked for it and what it cost, by replaying the failing requests.",
     "live": "https://kinnuworks.github.io/whodunit/",
     "repo": "whodunit",
-    "video": null
+    "video": null,
+    "builtFor": "neatHack"
   },
   {
     "name": "Mealtime",
     "what": "Plans a big meal backwards from dinner time and sends each cook their next step.",
     "live": null,
     "repo": "mealtime",
-    "video": null
+    "video": null,
+    "builtFor": "Builder.io Agent-Native Hackathon"
   },
   {
     "name": "Tablefolk",
     "what": "AI characters for tabletop games that only know what was said in front of them.",
     "live": null,
     "repo": "tablefolk",
-    "video": null
+    "video": null,
+    "builtFor": "Flip the Switch"
   },
   {
     "name": "Giftlink",
     "what": "Send NIM as a link; whoever opens it claims the NIM into their Nimiq Pay wallet.",
     "live": null,
     "repo": "giftlink",
-    "video": null
+    "video": null,
+    "builtFor": "Nimiq Mini Apps Competition, Cycle III"
   },
   {
     "name": "Plumb",
     "what": "A capped vault on Mezo that pays MUSD holders to keep a standing bid under MUSD.",
     "live": null,
     "repo": "plumb",
-    "video": null
+    "video": null,
+    "builtFor": "Mezo Buildathon, Wave 2"
   },
   {
     "name": "Varde",
     "what": "Researches Norwegian companies from their organisation numbers; every fact carries a source, a date and the quoted text.",
     "live": null,
     "repo": "varde",
-    "video": null
+    "video": null,
+    "builtFor": "Builderr Signalpost challenge"
   },
   {
     "name": "Which tests first",
@@ -200,14 +220,16 @@
     "what": "Runs open-source research agents on the same briefing and grades them from their own logs when the model or search breaks.",
     "live": null,
     "repo": "moose-test",
-    "video": null
+    "video": null,
+    "builtFor": "Global AI Hackathon"
   },
   {
     "name": "Fallow",
     "what": "A weekly rotation strategy across BTC, ETH and tokenised stocks, gold and Treasuries on Bitget.",
     "live": "https://kinnuworks.github.io/fallow/",
     "repo": "fallow",
-    "video": null
+    "video": null,
+    "builtFor": "Bitget AI Base Camp Hackathon, Season 2"
   },
   {
     "name": "Foley",
@@ -235,6 +257,7 @@
     "what": "Five coding-agent seats in one BAND room close every clause of a spec, each with evidence.",
     "live": null,
     "repo": "clausework",
-    "video": null
+    "video": null,
+    "builtFor": "WeAreDevelopers x BAND Dark Factory"
   }
 ]
