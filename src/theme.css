@@ -74,3 +74,6 @@ main > section:not(.hero) { max-width: 880px; margin-left: auto; margin-right: a
 .work h1 { font-size: clamp(36px, 4.6vw, 76px); line-height: 1; margin: 24px 0 28px; }
 .work .who { margin-bottom: 14px; }
 .work > :not(h1) { max-width: 920px; }
+/* The hero's lines wrap instead of running off the panel, so the whole rule reads. */
+.proof code { min-width: 0; }
+.proof .ln { white-space: pre-wrap; padding-left: 3.2em; text-indent: -3.2em; overflow-wrap: anywhere; }
