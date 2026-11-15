@@ -92,12 +92,15 @@ function page({ title, description, path, body, noindex = false }) {
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#ffffff">${noindex ? '\n<meta name="robots" content="noindex">' : ""}
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23fff' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
-<link rel="preload" href="/fonts/inter-tight-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>${css}</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="top"><a href="/" class="home">${esc(site.name)}</a></header>
+<header class="top">
+<a href="/" class="home"><span class="dot" aria-hidden="true"></span><span class="home-name">${esc(site.name)}</span></a>
+<nav class="bar-links" aria-label="Elsewhere"><a class="bar-cta" href="/#contact-h">${esc(site.ctaContact)}</a></nav>
+</header>
 <main id="main">
 ${body}
 </main>
@@ -115,7 +118,7 @@ const heroFrom = featured.find((p) => p.heroLine);
 function heroH1() {
   const lead = `${site.name} is one who `;
   if (!site.hero.startsWith(lead)) return esc(site.hero);
-  return `<span class="h-name">${esc(site.name)}</span> <span class="h-who">is one who</span> <span class="h-rest">${esc(site.hero.slice(lead.length))}</span>`;
+  return `<span class="h-name">${esc(site.name)}</span> <span class="h-tag"><span class="h-who">is one who</span> <span class="h-rest">${esc(site.hero.slice(lead.length))}</span></span>`;
 }
 function heroProof(p) {
   const all = readFileSync(join(root, "content", "code", `${p.cache}.full`), "utf8").split("\n");
@@ -135,13 +138,19 @@ const home = page({
   description: site.intro,
   path: "/",
   body: `<section class="hero">
+<div class="giant" aria-hidden="true"><span>${esc(site.name.split(" ")[0].toLowerCase())}</span><span>${esc(site.name.split(" ").slice(1).join(" ").toLowerCase())}</span></div>
 <h1>${heroH1()}</h1>
 ${heroFrom ? heroProof(heroFrom) : ""}
+<p class="corner corner-l">${esc(site.cornerLeft)}</p>
+<p class="corner corner-r"><a href="https://github.com/kinnuworks">${esc(site.cornerRight)}</a></p>
+</section>
+<section class="lede" aria-label="About me">
 <p class="intro">${esc(site.intro)}</p>
 <p class="howto">${esc(site.howto)}</p>
 <p class="via" id="via" role="note" hidden></p>
 <script>(function(){try{var m=document.cookie.match(/(?:^|; )ow_a=([^;]+)/);if(/[?&]state=via\\b/.test(location.search))m=[0,"unstop"];if(!m)return;var a=decodeURIComponent(m[1]).replace(/[^\\p{L}\\p{N} ._-]/gu,"").replace(/[-_]+/g," ").trim();if(!a)return;a=a.charAt(0).toUpperCase()+a.slice(1);var el=document.getElementById("via");el.textContent=${JSON.stringify(site.via)}.replace("{app}",a);el.hidden=false;}catch(e){}})();</script>
 </section>
+<div class="marquee" aria-hidden="true"><div>${Array(6).fill(`<span>stops and asks</span><i></i>`).join("")}</div></div>
 <section aria-labelledby="featured-h">
 <h2 id="featured-h">${esc(site.featuredHeading)}</h2>
 <ol class="clauses">
@@ -160,7 +169,7 @@ ${products.map((p) => `<li><h3>${esc(p.name)}</h3><p>${esc(p.what)}</p>${p.built
 <section aria-labelledby="outside-h">
 <h2 id="outside-h">${esc(site.outsideHeading)}</h2>
 <ul class="outside">
-${site.outside.map((o) => `<li><h3>${esc(o.title)}</h3><p>${esc(o.text)}</p>${o.link ? `<p class="links"><a href="${esc(o.link)}">${esc(o.linkText)}</a></p>` : ""}</li>`).join("\n")}
+${site.outside.map((o, i) => `<li id="out-${i}"><h3>${esc(o.title)}</h3><p>${esc(o.text)}</p>${o.link ? `<p class="links"><a href="${esc(o.link)}">${esc(o.linkText)}</a></p>` : ""}</li>`).join("\n")}
 </ul>
 </section>
 <section aria-labelledby="contact-h">

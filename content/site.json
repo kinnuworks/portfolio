@@ -40,5 +40,8 @@
   "colophonRule": "plain code for numbers, AI for language, people for decisions",
   "colophonSource": "https://www.acadable.com/manifesto",
   "via": "You came in through my {app} application link. ONEWHO, the service behind this address, shows me which pages you open from that link, which is why each product has its own page.",
-  "footerBuilt": "Plain HTML and CSS, {kb} KB for all the pages together. This site loads no trackers and no fonts from another server; ONEWHO logs visits that come through application links."
+  "footerBuilt": "Plain HTML and CSS, {kb} KB for all the pages together. This site loads no trackers and no fonts from another server; ONEWHO logs visits that come through application links.",
+  "cornerLeft": "& shows the line of code",
+  "cornerRight": "Every line pinned to a commit on GitHub",
+  "ctaContact": "Get in touch"
 }
