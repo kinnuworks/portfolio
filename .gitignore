@@ -21,3 +21,5 @@ content/answers-for-review.md
 .claude/
 .playwright-mcp/
 sachin.html
+.vercel
+.env*
