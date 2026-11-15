@@ -66,7 +66,7 @@ function clause(p, i) {
 <summary>
 <span class="who">${esc(site.first)} is one who</span>
 <h3 class="does">${esc(p.clause)}.</h3>
-<span class="what"><strong>${esc(p.name)}</strong> ${esc(p.what)}</span>
+<span class="what"><strong>${esc(p.name)}</strong> ${esc(p.what)}</span>${p.result ? `<span class="won">${esc(p.result)}</span>` : ""}
 </summary>
 ${featuredBody(p, 0)}
 <p class="more"><a href="/work/${p.slug}">More on ${esc(p.name)}</a>${links(p)}</p>
@@ -129,6 +129,18 @@ function heroProof(p) {
   return `<figure class="proof window">
 <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span>${esc(p.repo)}/${esc(p.path)} at ${p.sha.slice(0, 7)}</span></div>
 <pre tabindex="0" role="group" aria-label="${esc(p.path)}, lines ${a} to ${b}, line ${p.heroLine} highlighted"><code>${rows.join("")}</code></pre>
+<div class="gate" role="group" aria-label="Try the rule on line ${p.heroLine}" hidden>
+<div class="keys"><button type="button" class="key" data-k="sev" aria-pressed="true"><i></i>Severe alert</button><button type="button" class="key" data-k="ai" aria-pressed="false"><i></i>AI approves</button><button type="button" class="key" data-k="p1" aria-pressed="false"><i></i>Person 1 approves</button><button type="button" class="key" data-k="p2" aria-pressed="false"><i></i>Person 2 approves</button></div>
+<p class="gate-status" role="status" aria-live="polite"><i class="led"></i><span></span></p>
+</div>
+<script>(function(){var g=document.currentScript.previousElementSibling,st=g.querySelector(".gate-status"),out=st.querySelector("span"),code=g.previousElementSibling;g.hidden=false;
+function on(k){return g.querySelector('[data-k="'+k+'"]').getAttribute("aria-pressed")==="true";}
+function run(){var need=on("sev")?2:1,names=(on("p1")?1:0)+(on("p2")?1:0),ok=names>=need;
+st.dataset.state=ok?"released":"held";
+out.textContent=(ok?"Released: ":"Held: ")+names+" of "+need+" named "+(need===1?"person":"people")+(on("ai")&&!ok?". The AI's approval doesn't count.":".");
+code.classList.remove("eval");void code.offsetWidth;code.classList.add("eval");}
+g.addEventListener("click",function(e){var b=e.target.closest(".key");if(!b)return;b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")==="true"?"false":"true");run();});
+run();code.classList.remove("eval");})();</script>
 <figcaption>${esc(p.heroCaption)} <a href="${url}">${esc(p.path)}, line ${p.heroLine}</a></figcaption>
 </figure>`;
 }
@@ -138,14 +150,14 @@ const home = page({
   description: site.intro,
   path: "/",
   body: `<section class="hero">
-<div class="giant" aria-hidden="true"><span>${esc(site.name.split(" ")[0].toLowerCase())}</span><span>${esc(site.name.split(" ").slice(1).join(" ").toLowerCase())}</span></div>
+<div class="giant" aria-hidden="true">${site.name.toLowerCase().split(" ").map((w, j) => `<span>${[...w].map((c, i) => `<b style="--c:${i + j * 6}">${esc(c)}</b>`).join("")}</span>`).join("")}</div>
 <h1>${heroH1()}</h1>
 ${heroFrom ? heroProof(heroFrom) : ""}
 <p class="corner corner-l">${esc(site.cornerLeft)}</p>
 <p class="corner corner-r"><a href="https://github.com/kinnuworks">${esc(site.cornerRight)}</a></p>
 </section>
 <section class="lede" aria-label="About me">
-<p class="intro">${esc(site.intro)}</p>
+<p class="intro">${site.intro.split(" ").map((w) => `<span class="w">${esc(w)}</span>`).join(" ")}</p>
 <p class="howto">${esc(site.howto)}</p>
 <p class="via" id="via" role="note" hidden></p>
 <script>(function(){try{var m=document.cookie.match(/(?:^|; )ow_a=([^;]+)/);if(/[?&]state=via\\b/.test(location.search))m=[0,"unstop"];if(!m)return;var a=decodeURIComponent(m[1]).replace(/[^\\p{L}\\p{N} ._-]/gu,"").replace(/[-_]+/g," ").trim();if(!a)return;a=a.charAt(0).toUpperCase()+a.slice(1);var el=document.getElementById("via");el.textContent=${JSON.stringify(site.via)}.replace("{app}",a);el.hidden=false;}catch(e){}})();</script>
@@ -162,7 +174,7 @@ ${featured.map(clause).join("\n")}
 <details class="restbox">
 <summary><span class="count">${products.length} more products</span> <span class="sub">${esc(site.restIntro)}</span></summary>
 <ul class="rest">
-${products.map((p) => `<li><h3>${esc(p.name)}</h3><p>${esc(p.what)}</p>${p.builtFor ? `<p class="built">Built for ${esc(p.builtFor)}</p>` : ""}<p class="links">${links(p)}</p></li>`).join("\n")}
+${products.map((p) => `<li><h3>${esc(p.name)}</h3><p>${esc(p.what)}</p>${p.builtFor ? `<p class="built">Built for ${esc(p.builtFor)}</p>` : ""}${p.result ? `<p class="won">${esc(p.result)}</p>` : ""}<p class="links">${links(p)}</p></li>`).join("\n")}
 </ul>
 </details>
 </section>
@@ -186,7 +198,7 @@ const workPage = (p) => page({
 <p class="crumb"><a href="/#${p.slug}">Back to all seven</a></p>
 <h1><span class="who">${esc(site.name)} is one who</span> ${esc(p.clause)}.</h1>
 <p class="intro"><strong>${esc(p.name)}</strong> ${esc(p.what)}</p>
-<p class="built">Built for ${esc(p.builtFor)}.</p>
+<p class="built">Built for ${esc(p.builtFor)}.</p>${p.result ? `<p class="won">${esc(p.result)}</p>` : ""}
 <p class="links">${links(p)}</p>
 ${featuredBody(p, 6, 2)}
 </article>`,
