@@ -1,0 +1,76 @@
+/* The theme, built on Midlife Engineering's system: oversized grotesk with one dark object
+   over it, big plain statements, one orange marker. Fonts are self-hosted. */
+@font-face { font-family: "Inter Tight"; src: url(/fonts/inter-tight-latin-wght-normal.woff2) format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Fragment Mono"; src: url(/fonts/fragment-mono-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+
+/* The hero window's top strip shows only where styled; code wraps on phones so a
+   screenshot or recording never needs a sideways scroll. */
+.window .chrome { display: none; }
+.note { margin: 0; }
+@media (max-width: 600px) {
+  pre code { min-width: 0; }
+  .ln { white-space: pre-wrap; padding-left: 3.2em; text-indent: -3.2em; overflow-wrap: anywhere; }
+}
+
+:root {
+  --ink: #262626; --soft: #5f5f5f; --line: #d9d9d9; --bg: #f3f3f3; --link: #262626; --orange: #ff611a;
+  --dev: #141416; --dev-2: #232327; --dev-ink: #ececec; --dev-soft: #a3a3a8;
+}
+body { font-family: "Inter Tight", ui-sans-serif, system-ui, sans-serif; font-size: 18px; line-height: 1.45; color: var(--ink); background: var(--bg); }
+.top, main, .foot { max-width: 1400px; padding: 0 22px; }
+.home { font-weight: 500; display: inline-flex; align-items: center; gap: 10px; }
+.home::before { content: ""; width: 26px; height: 26px; border-radius: 50%; background: var(--orange); box-shadow: inset 1px 1px 1px rgb(255 255 255 / 0.25), inset -1px -1px 1px rgb(0 0 0 / 0.3); }
+h1 { font-weight: 500; font-size: clamp(44px, 7.6vw, 124px); line-height: 0.95; letter-spacing: -0.045em; margin: 40px 0 0; }
+h2 { font-weight: 400; font-size: 18px; color: var(--soft); margin: 120px 0 20px; letter-spacing: 0; }
+.hero { position: relative; }
+.hero .proof { position: relative; z-index: 1; max-width: 760px; margin: -0.14em 0 0 auto; font-size: clamp(44px, 7.6vw, 124px); }
+@media (max-width: 700px) { .hero .proof { margin: 20px 0 0; } }
+.hero .proof > * { font-size: 1rem; }
+.window, .code { background: var(--dev); border-radius: 6px; padding: 8px; box-shadow: inset 1px 1px 1px rgb(255 255 255 / 0.12), inset -1px -1px 1px rgb(0 0 0 / 0.55), 0 3px 3px -1px rgb(0 0 0 / 0.5), 0 12px 24px -6px rgb(0 0 0 / 0.45), 0 40px 60px -20px rgb(0 0 0 / 0.35); margin: 0; }
+.window .chrome { display: flex; align-items: center; gap: 6px; padding: 6px 8px 10px; }
+.window .chrome i { width: 9px; height: 9px; border-radius: 50%; background: #3a3a3f; box-shadow: inset 1px 1px 0 rgb(255 255 255 / 0.15); }
+.window .chrome i:first-child { background: var(--orange); }
+.window .chrome span { margin-left: auto; font-family: "Fragment Mono", ui-monospace, monospace; font-size: 13px; color: var(--dev-soft); }
+pre { font-family: "Fragment Mono", ui-monospace, monospace; font-size: 14px; background: var(--dev-2); color: var(--dev-ink); border-radius: 4px; box-shadow: inset 1px 1px 0 rgb(0 0 0 / 0.4); }
+.no { color: #8c8c92; }
+:root { --hot: #3b2a22; }
+.ln.hot { box-shadow: inset 3px 0 0 var(--orange); }
+.window figcaption, .code figcaption { color: var(--dev-soft); font-size: 14px; padding: 10px 8px 4px; margin: 0; }
+.window figcaption a, .code figcaption a { color: var(--dev-ink); }
+.hero .intro { max-width: 760px; margin: 48px auto 8px; font-size: clamp(22px, 1.2vw + 16px, 32px); line-height: 1.2; font-weight: 500; }
+.hero .howto, .hero .via { max-width: 760px; margin-left: auto; margin-right: auto; }
+.clause, .clause:last-child { border-color: var(--line); }
+summary { padding: 32px 0; }
+summary .who { font-size: 16px; color: var(--soft); }
+summary h3.does { font-weight: 500; font-size: clamp(24px, 1.2vw + 18px, 36px); line-height: 1.15; letter-spacing: -0.02em; }
+summary .does::after { color: var(--orange); }
+summary .what { font-size: 17px; }
+details[open] { padding-bottom: 32px; }
+details[open] > :not(summary) { max-width: 900px; }
+.label { font-size: 15px; font-weight: 400; color: var(--soft); }
+.q { font-size: 20px; font-weight: 500; }
+.a { font-size: 18px; }
+.rest { columns: 2 340px; column-gap: 48px; }
+.rest li { break-inside: avoid; border-color: var(--line); }
+.rest h3 { font-weight: 500; font-size: 20px; }
+.outside li { border-color: var(--line); }
+.outside h3 { font-weight: 500; font-size: 24px; }
+a { color: var(--ink); }
+.contact { font-size: clamp(28px, 2vw + 16px, 48px); font-weight: 500; letter-spacing: -0.03em; }
+.foot { border-color: var(--line); }
+.via { border-left-color: var(--orange); }
+
+/* Midlife keeps reading content in a narrow centred column under the full-width type,
+   and separates things with space, not lines. */
+main > section:not(.hero) { max-width: 880px; margin-left: auto; margin-right: auto; }
+.clause, .clause:last-child, .rest li, .outside li { border: 0; }
+.clause + .clause { margin-top: 8px; }
+.rest li, .outside li { padding: 14px 0; }
+.foot { max-width: 880px; border: 0; }
+@media (max-width: 600px) {
+  .proof .ln:not(.hot) { display: none; }
+  .window .chrome span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+}
+.work h1 { font-size: clamp(36px, 4.6vw, 76px); line-height: 1; margin: 24px 0 28px; }
+.work .who { margin-bottom: 14px; }
+.work > :not(h1) { max-width: 920px; }

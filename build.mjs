@@ -13,7 +13,7 @@ const BASE = process.env.SITE_URL || "https://dhirajkavuri.isonewho.codes";
 const IMG_BASE = process.env.IMG_URL || "https://dhiraj-kavuri.vercel.app";
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-const css = readFileSync(join(root, "src", "style.css"), "utf8").replace(/\s*\n\s*/g, "\n").trim();
+const css = ["style.css", "theme.css"].map((f) => readFileSync(join(root, "src", f), "utf8")).join("\n").replace(/\s*\n\s*/g, "\n").trim();
 
 const codeUrl = (p) => `https://github.com/kinnuworks/${p.repo}/blob/${p.sha}/${p.path}#L${p.lines[0]}-L${p.lines[1]}`;
 const repoUrl = (repo) => `https://github.com/kinnuworks/${repo}`;
@@ -52,7 +52,7 @@ function featuredBody(p, pad, h = 4) {
 <h${h} class="label">The question</h${h}>
 <p class="q">${esc(p.question)}</p>
 <h${h} class="label">My answer</h${h}>
-<p class="a">${esc(p.answer)}</p>
+<div class="note"><p class="a">${esc(p.answer)}</p></div>
 </div>
 <h${h} class="label">The lines that make it true</h${h}>
 ${codeBlock(p, pad)}
@@ -92,6 +92,7 @@ function page({ title, description, path, body, noindex = false }) {
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#ffffff">${noindex ? '\n<meta name="robots" content="noindex">' : ""}
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23fff' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="/fonts/inter-tight-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>${css}</style>
 </head>
 <body>
@@ -111,11 +112,20 @@ ${body}
 }
 
 const heroFrom = featured.find((p) => p.heroLine);
+function heroH1() {
+  const lead = `${site.name} is one who `;
+  if (!site.hero.startsWith(lead)) return esc(site.hero);
+  return `<span class="h-name">${esc(site.name)}</span> <span class="h-who">is one who</span> <span class="h-rest">${esc(site.hero.slice(lead.length))}</span>`;
+}
 function heroProof(p) {
-  const line = readFileSync(join(root, "content", "code", `${p.cache}.full`), "utf8").split("\n")[p.heroLine - 1].trim();
+  const all = readFileSync(join(root, "content", "code", `${p.cache}.full`), "utf8").split("\n");
+  const [a, b] = p.heroRange || [p.heroLine, p.heroLine];
+  const rows = [];
+  for (let n = a; n <= b; n++) rows.push(`<span class="ln${n === p.heroLine ? " hot" : ""}"${n === p.heroLine ? ' style="--i:4"' : ""}><span class="no" aria-hidden="true">${n}</span>${esc(all[n - 1]) || " "}</span>`);
   const url = `https://github.com/kinnuworks/${p.repo}/blob/${p.sha}/${p.path}#L${p.heroLine}`;
-  return `<figure class="proof">
-<pre tabindex="0" role="group" aria-label="${esc(p.path)}, line ${p.heroLine}"><code><span class="ln hot" style="--i:4"><span class="no" aria-hidden="true">${p.heroLine}</span>${esc(line)}</span></code></pre>
+  return `<figure class="proof window">
+<div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span>${esc(p.repo)}/${esc(p.path)} at ${p.sha.slice(0, 7)}</span></div>
+<pre tabindex="0" role="group" aria-label="${esc(p.path)}, lines ${a} to ${b}, line ${p.heroLine} highlighted"><code>${rows.join("")}</code></pre>
 <figcaption>${esc(p.heroCaption)} <a href="${url}">${esc(p.path)}, line ${p.heroLine}</a></figcaption>
 </figure>`;
 }
@@ -125,7 +135,7 @@ const home = page({
   description: site.intro,
   path: "/",
   body: `<section class="hero">
-<h1>${esc(site.hero)}</h1>
+<h1>${heroH1()}</h1>
 ${heroFrom ? heroProof(heroFrom) : ""}
 <p class="intro">${esc(site.intro)}</p>
 <p class="howto">${esc(site.howto)}</p>
@@ -193,6 +203,8 @@ const size = (dir) => readdirSync(dir, { withFileTypes: true }).reduce((n, e) =>
 const kb = Math.round(size(out) / 1024);
 for (const [f, html] of files) writeFileSync(join(out, f), html.replace("__KB__", kb));
 copyFileSync(join(root, "src", "og.png"), join(out, "og.png"));
+mkdirSync(join(out, "fonts"), { recursive: true });
+for (const f of readdirSync(join(root, "src", "fonts"))) copyFileSync(join(root, "src", "fonts", f), join(out, "fonts", f));
 writeFileSync(join(out, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${BASE}/sitemap.xml\n`);
 writeFileSync(join(out, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${["/", ...featured.map((p) => `/work/${p.slug}`)].map((u) => `<url><loc>${BASE}${u}</loc></url>`).join("\n")}\n</urlset>\n`);
 console.log(`built ${files.length} pages, ${kb} KB`);

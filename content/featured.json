@@ -59,7 +59,11 @@
     ],
     "heroLine": 147,
     "heroCaption": "That line is from Nadhir, an emergency alert tool: a live Extreme or Severe warning needs two named people to approve it, not one.",
-    "confirmed": false
+    "confirmed": false,
+    "heroRange": [
+      145,
+      153
+    ]
   },
   {
     "slug": "concord",
