@@ -4,6 +4,8 @@ My portfolio. Each featured product has one thing its AI is not allowed to decid
 
 Live: https://dhirajkavuri.isonewho.codes
 
+![Opening Tollgate on the page: the question, my answer, and the lines that stop the answer when payment stops, lit in order](docs/core-loop.gif)
+
 Try it in 30 seconds:
 1. Open the link. The first three products are already open.
 2. Read one question and my answer, then look at the highlighted lines under it.
@@ -13,6 +15,7 @@ Try it in 30 seconds:
 
 - `content/` holds everything the site says: `site.json` (copy), `featured.json` (the seven products, their questions, answers and pinned code ranges), `products.json` (everything else), `facts.json` (every number in the copy, with its source).
 - `content/code/` holds the source files at their pinned commits. A test downloads each one from GitHub and fails if the copy here differs.
+- `scripts/gif.mjs` and `scripts/og.mjs` record the GIF above and the link preview from the real page.
 - `build.mjs` turns the content into plain HTML with inline CSS in `dist/`. No framework, no client JavaScript, no web fonts.
 
 ```bash
