@@ -26,7 +26,7 @@ async function resolve(urlPath) {
   for (const candidate of [base, join(base, "index.html"), base + ".html"]) {
     try {
       if ((await stat(candidate)).isFile()) return candidate;
-    } catch {}
+    } catch {} // not this candidate; try the next one
   }
   return null;
 }

@@ -33,7 +33,7 @@ function codeBlock(p, pad = 0) {
   const label = `${p.path}, lines ${spans.replace(/–/g, " to ")}, at commit ${p.sha.slice(0, 7)}`;
   return `<figure class="code">
 <figcaption><a href="${codeUrl(p)}">${esc(p.repo)}/${esc(p.path)}</a> <span class="at">lines ${spans} at ${p.sha.slice(0, 7)}</span></figcaption>
-<pre tabindex="0" aria-label="${esc(label)}"><code>${rows.join("\n")}</code></pre>
+<pre tabindex="0" aria-label="${esc(label)}"><code>${rows.join("")}</code></pre>
 </figure>`;
 }
 
