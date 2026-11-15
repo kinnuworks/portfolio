@@ -93,3 +93,30 @@ test("the first screen shows a real line of code, not only words", async ({ page
   const line = readFileSync(`content/code/${n.cache}.full`, "utf8").split("\n")[n.heroLine - 1].trim();
   await expect(pre).toContainText(line);
 });
+
+test("opening a clause lights its enforcing lines in order, and it's over within a second", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/");
+  const item = page.locator(`#${featured[4].slug}`);
+  await item.locator("summary").click();
+  const delays = await item.locator(".ln.hot").evaluateAll((els) => els.map((e) => {
+    const s = getComputedStyle(e, "::before");
+    return [s.animationName, parseFloat(s.animationDelay) * 1000 + parseFloat(s.animationDuration) * 1000];
+  }));
+  expect(delays.length).toBeGreaterThan(0);
+  for (const [name] of delays) expect(name).toBe("mark");
+  for (let i = 1; i < delays.length; i++) expect(delays[i][1]).toBeGreaterThanOrEqual(delays[i - 1][1]);
+  expect(Math.max(...delays.map((d) => d[1]))).toBeLessThanOrEqual(1000);
+});
+
+test("a visitor from a ONEWHO application link is told what that link records", async ({ page, context, baseURL }) => {
+  await page.goto("/");
+  await expect(page.locator("#via")).toBeHidden();
+  await context.addCookies([{ name: "ow_a", value: "unstop", url: baseURL }]);
+  await page.goto("/");
+  await expect(page.locator("#via")).toBeVisible();
+  await expect(page.locator("#via")).toContainText("Unstop application link");
+  await context.addCookies([{ name: "ow_a", value: "<img src=x onerror=alert(1)>", url: baseURL }]);
+  await page.goto("/");
+  expect(await page.locator("#via img").count()).toBe(0);
+});
