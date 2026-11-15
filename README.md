@@ -16,7 +16,7 @@ Try it in 30 seconds:
 - `content/` holds everything the site says: `site.json` (copy), `featured.json` (the seven products, their questions, answers and pinned code ranges), `products.json` (everything else), `facts.json` (every number in the copy, with its source).
 - `content/code/` holds the source files at their pinned commits. A test downloads each one from GitHub and fails if the copy here differs.
 - `scripts/gif.mjs` and `scripts/og.mjs` record the GIF above and the link preview from the real page.
-- `build.mjs` turns the content into plain HTML with inline CSS in `dist/`. No framework, no client JavaScript, no web fonts.
+- `build.mjs` turns the content into plain HTML with inline CSS in `dist/`. No framework and no web fonts. The only script is a few hundred bytes inline, for the ONEWHO application-link note.
 
 ```bash
 npm install
