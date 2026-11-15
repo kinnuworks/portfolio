@@ -146,7 +146,7 @@ run();code.classList.remove("eval");})();</script>
 }
 
 const home = page({
-  title: `${site.name}: AI with rules it can't break`,
+  title: `${site.name}: AI you can check, line by line`,
   description: site.intro,
   path: "/",
   body: `<section class="hero">
@@ -162,9 +162,9 @@ ${heroFrom ? heroProof(heroFrom) : ""}
 <ul class="prizes">${site.prizes.map((z) => `<li><b>${esc(z.place)}</b><span>${esc(z.where)}</span></li>`).join("")}</ul>
 <p class="howto">${esc(site.howto)}</p>
 <p class="via" id="via" role="note" hidden></p>
-<script>(function(){try{var m=document.cookie.match(/(?:^|; )ow_a=([^;]+)/);if(/[?&]state=via\\b/.test(location.search))m=[0,"unstop"];if(!m)return;var a=decodeURIComponent(m[1]).replace(/[^\\p{L}\\p{N} ._-]/gu,"").replace(/[-_]+/g," ").trim();if(!a)return;a=a.charAt(0).toUpperCase()+a.slice(1);var el=document.getElementById("via");el.textContent=${JSON.stringify(site.via)}.replace("{app}",a);el.hidden=false;}catch(e){}})();</script>
+<script>(function(){try{var m=document.cookie.match(/(?:^|; )ow_a=([^;]+)/);if(/[?&]state=via\\b/.test(location.search))m=[0,"unstop"];if(!m)return;var a=decodeURIComponent(m[1]).split(".")[0].replace(/[^\\p{L}\\p{N} ._-]/gu,"").replace(/[-_]+/g," ").trim();if(!a)return;a=a.charAt(0).toUpperCase()+a.slice(1);var el=document.getElementById("via");el.textContent=${JSON.stringify(site.via)}.replace("{app}",a);el.hidden=false;}catch(e){}})();</script>
 </section>
-<div class="marquee" aria-hidden="true"><div>${Array(6).fill(`<span>rules it can't break</span><i></i>`).join("")}</div></div>
+<div class="marquee" aria-hidden="true"><div>${Array(6).fill(`<span>check it line by line</span><i></i>`).join("")}</div></div>
 <section aria-labelledby="featured-h">
 <h2 id="featured-h">${esc(site.featuredHeading)}</h2>
 <ol class="clauses">

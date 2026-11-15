@@ -189,3 +189,8 @@ details[open] summary .does::after, summary .does::after { content: none; }
 
 /* The name's letters rise from behind their own line: the line clips, the letters only move. */
 .giant > span { overflow: hidden; padding-bottom: 0.24em; margin-bottom: -0.24em; }
+
+/* ONEWHO's badge strip sits along the bottom of the window: the corner text sits above it. */
+.corner { bottom: 64px; }
+.giant { bottom: 120px; }
+@media (max-width: 700px) { .corner { bottom: auto; } }
