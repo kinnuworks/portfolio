@@ -1,1 +1,2 @@
-{ "buildCommand": "node build.mjs", "outputDirectory": "dist", "cleanUrls": true, "trailingSlash": false, "installCommand": "echo skip" }
+{ "buildCommand": "node build.mjs", "outputDirectory": "dist", "cleanUrls": true, "trailingSlash": false, "installCommand": "echo skip",
+  "headers": [{ "source": "/(.*)", "headers": [{ "key": "X-Content-Type-Options", "value": "nosniff" }, { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }] }] }

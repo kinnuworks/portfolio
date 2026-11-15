@@ -21,7 +21,9 @@ const types = {
 };
 
 async function resolve(urlPath) {
-  const clean = normalize(decodeURIComponent(urlPath.split("?")[0])).replace(/^(\.\.[/\\])+/, "");
+  let decoded;
+  try { decoded = decodeURIComponent(urlPath.split("?")[0]); } catch { return null; } // malformed escape: treat as not found
+  const clean = normalize(decoded).replace(/^(\.\.[/\\])+/, "");
   const base = join(root, clean);
   for (const candidate of [base, join(base, "index.html"), base + ".html"]) {
     try {

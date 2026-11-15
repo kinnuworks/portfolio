@@ -9,6 +9,8 @@ const featured = read("featured.json");
 const products = read("products.json");
 const out = join(root, "dist");
 const BASE = process.env.SITE_URL || "https://dhirajkavuri.isonewho.codes";
+// The deploy host serves og.png whether or not the ONEWHO address is connected yet.
+const IMG_BASE = process.env.IMG_URL || "https://dhiraj-kavuri.vercel.app";
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const css = readFileSync(join(root, "src", "style.css"), "utf8").replace(/\s*\n\s*/g, "\n").trim();
@@ -24,7 +26,7 @@ function codeBlock(p, pad = 0) {
   p.ranges.forEach(([a, b], i) => {
     const from = Math.max(1, a - pad);
     const to = Math.min(all.length, b + pad);
-    if (i > 0) rows.push(`<span class="ln gap"><span class="no" aria-hidden="true">⋮</span></span>`);
+    if (i > 0) rows.push(`<span class="ln gap"><span class="no" aria-hidden="true">⋮</span><span class="sr">lines skipped</span></span>`);
     for (let n = from; n <= to; n++) {
       rows.push(`<span class="ln${hot(n) ? " hot" : ""}"${hot(n) ? ` style="--i:${Math.min(k++, 10)}"` : ""}><span class="no" aria-hidden="true">${n}</span>${esc(all[n - 1]) || " "}</span>`);
     }
@@ -33,28 +35,29 @@ function codeBlock(p, pad = 0) {
   const label = `${p.path}, lines ${spans.replace(/–/g, " to ")}, at commit ${p.sha.slice(0, 7)}`;
   return `<figure class="code">
 <figcaption><a href="${codeUrl(p)}">${esc(p.repo)}/${esc(p.path)}</a> <span class="at">lines ${spans} at ${p.sha.slice(0, 7)}</span></figcaption>
-<pre tabindex="0" aria-label="${esc(label)}"><code>${rows.join("")}</code></pre>
+<pre tabindex="0" role="group" aria-label="${esc(label)}, the enforcing lines highlighted"><code>${rows.join("")}</code></pre>
 </figure>`;
 }
 
 function links(p) {
   const l = [];
   if (p.live) l.push(`<a href="${esc(p.live)}">Try ${esc(p.name)}</a>`);
-  if (p.repo) l.push(`<a href="${repoUrl(p.repo)}">Code</a>`);
-  if (p.video) l.push(`<a href="${esc(p.video)}">Demo video</a>`);
+  if (p.repo) l.push(`<a href="${repoUrl(p.repo)}">Code<span class="sr"> for ${esc(p.name)}</span></a>`);
+  if (p.video) l.push(`<a href="${esc(p.video)}">Demo video<span class="sr"> of ${esc(p.name)}</span></a>`);
   return l.join("");
 }
 
-function featuredBody(p, pad) {
+function featuredBody(p, pad, h = 4) {
   return `<div class="qa">
-<p class="label">The question</p>
+<h${h} class="label">The question</h${h}>
 <p class="q">${esc(p.question)}</p>
-<p class="label">My answer</p>
+<h${h} class="label">My answer</h${h}>
 <p class="a">${esc(p.answer)}</p>
 </div>
-<p class="label">The lines that make it true</p>
+<h${h} class="label">The lines that make it true</h${h}>
 ${codeBlock(p, pad)}
-<p class="caveat"><span class="label">What it doesn't do</span> ${esc(p.caveat)}</p>`;
+<h${h} class="label">What it doesn't do</h${h}>
+<p class="caveat">${esc(p.caveat)}</p>`;
 }
 
 function clause(p, i) {
@@ -62,7 +65,7 @@ function clause(p, i) {
 <details${i < 3 ? " open" : ""}>
 <summary>
 <span class="who">${esc(site.first)} is one who</span>
-<span class="does">${esc(p.clause)}.</span>
+<h3 class="does">${esc(p.clause)}.</h3>
 <span class="what"><strong>${esc(p.name)}</strong> ${esc(p.what)}</span>
 </summary>
 ${featuredBody(p, 0)}
@@ -71,7 +74,7 @@ ${featuredBody(p, 0)}
 </li>`;
 }
 
-function page({ title, description, path, body }) {
+function page({ title, description, path, body, noindex = false }) {
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -83,11 +86,11 @@ function page({ title, description, path, body }) {
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:type" content="website">
-<meta property="og:image" content="${BASE}/og.png">
+<meta property="og:image" content="${IMG_BASE}/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#ffffff">${noindex ? '\n<meta name="robots" content="noindex">' : ""}
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23fff' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
 <style>${css}</style>
 </head>
@@ -99,8 +102,9 @@ ${body}
 </main>
 <footer class="foot">
 <p>Acadable's manifesto says: <q>${esc(site.colophonRule)}</q>. <a href="${site.colophonSource}">Read it</a>.</p>
-<p>Plain HTML and CSS, about __KB__ KB in all, no trackers, no fonts from another server.</p>
+<p>${esc(site.footerBuilt).replace("{kb}", "__KB__")}</p>
 </footer>
+<script>(function(){function o(){var h=decodeURIComponent(location.hash.slice(1));if(!h)return;var el=document.getElementById(h);var d=el&&el.querySelector("details");if(d)d.open=true;}o();addEventListener("hashchange",o);})();</script>
 </body>
 </html>
 `;
@@ -111,7 +115,7 @@ function heroProof(p) {
   const line = readFileSync(join(root, "content", "code", `${p.cache}.full`), "utf8").split("\n")[p.heroLine - 1].trim();
   const url = `https://github.com/kinnuworks/${p.repo}/blob/${p.sha}/${p.path}#L${p.heroLine}`;
   return `<figure class="proof">
-<pre tabindex="0" aria-label="${esc(p.path)}, line ${p.heroLine}"><code><span class="ln hot" style="--i:4"><span class="no" aria-hidden="true">${p.heroLine}</span>${esc(line)}</span></code></pre>
+<pre tabindex="0" role="group" aria-label="${esc(p.path)}, line ${p.heroLine}"><code><span class="ln hot" style="--i:4"><span class="no" aria-hidden="true">${p.heroLine}</span>${esc(line)}</span></code></pre>
 <figcaption>${esc(p.heroCaption)} <a href="${url}">${esc(p.path)}, line ${p.heroLine}</a></figcaption>
 </figure>`;
 }
@@ -125,8 +129,8 @@ const home = page({
 ${heroFrom ? heroProof(heroFrom) : ""}
 <p class="intro">${esc(site.intro)}</p>
 <p class="howto">${esc(site.howto)}</p>
-<p class="via" id="via" hidden></p>
-<script>(function(){try{var m=document.cookie.match(/(?:^|; )ow_a=([^;]+)/);if(!m)return;var a=decodeURIComponent(m[1]).replace(/[^\\w .-]/g,"").replace(/[-_]+/g," ").trim();if(!a)return;a=a.charAt(0).toUpperCase()+a.slice(1);var el=document.getElementById("via");el.textContent=${JSON.stringify(site.via)}.replace("{app}",a);el.hidden=false;}catch(e){}})();</script>
+<p class="via" id="via" role="note" hidden></p>
+<script>(function(){try{var m=document.cookie.match(/(?:^|; )ow_a=([^;]+)/);if(!m)return;var a=decodeURIComponent(m[1]).replace(/[^\\p{L}\\p{N} ._-]/gu,"").replace(/[-_]+/g," ").trim();if(!a)return;a=a.charAt(0).toUpperCase()+a.slice(1);var el=document.getElementById("via");el.textContent=${JSON.stringify(site.via)}.replace("{app}",a);el.hidden=false;}catch(e){}})();</script>
 </section>
 <section aria-labelledby="featured-h">
 <h2 id="featured-h">${esc(site.featuredHeading)}</h2>
@@ -158,12 +162,12 @@ const workPage = (p) => page({
   description: p.what,
   path: `/work/${p.slug}`,
   body: `<article class="work">
-<p class="crumb"><a href="/#${p.slug}">All seven</a></p>
+<p class="crumb"><a href="/#${p.slug}">Back to all seven</a></p>
 <h1><span class="who">${esc(site.name)} is one who</span> ${esc(p.clause)}.</h1>
 <p class="intro"><strong>${esc(p.name)}</strong> ${esc(p.what)}</p>
 <p class="built">Built for ${esc(p.builtFor)}.</p>
 <p class="links">${links(p)}</p>
-${featuredBody(p, 6)}
+${featuredBody(p, 6, 2)}
 </article>`,
 });
 
@@ -171,6 +175,7 @@ const notFound = page({
   title: `Not found: ${site.name}`,
   description: site.intro,
   path: "/404",
+  noindex: true,
   body: `<section class="hero">
 <h1>Nothing at this address.</h1>
 <p class="intro">These pages exist:</p>
