@@ -199,3 +199,10 @@ test("the first screen's corner text stays clear of ONEWHO's badge strip", async
   // The strip is the bottom 40px of the window; nothing in the corners may overlap it.
   for (const [top, bottom] of boxes) expect(bottom <= vp.height - 40 || top >= vp.height).toBe(true);
 });
+
+test("every page links to this site's public source repo", async ({ page }) => {
+  for (const path of ["/", "/work/nadhir", "/no-such-page"]) {
+    await page.goto(path);
+    await expect(page.locator('.foot a[href="https://github.com/kinnuworks/portfolio"]')).toHaveCount(1);
+  }
+});

@@ -107,6 +107,7 @@ ${body}
 <footer class="foot">
 <p>Acadable's manifesto says: <q>${esc(site.colophonRule)}</q>. <a href="${site.colophonSource}">Read it</a>.</p>
 <p>${esc(site.footerBuilt).replace("{kb}", "__KB__")}</p>
+<p class="source">The source for this site, with its full history: <a href="https://github.com/kinnuworks/portfolio">github.com/kinnuworks/portfolio</a></p>
 </footer>
 <script>(function(){var st=(location.search.match(/[?&]state=([\\w-]+)/)||[])[1];if(st==="open"||st==="closed")document.querySelectorAll("details").forEach(function(d){d.open=st==="open";});function o(){var h=decodeURIComponent(location.hash.slice(1));if(!h)return;var el=document.getElementById(h);var d=el&&el.querySelector("details");if(d)d.open=true;}o();addEventListener("hashchange",o);})();</script>
 </body>
