@@ -150,10 +150,12 @@ ${featured.map(clause).join("\n")}
 </section>
 <section aria-labelledby="rest-h">
 <h2 id="rest-h">${esc(site.restHeading)}</h2>
-<p class="sub">${esc(site.restIntro)}</p>
+<details class="restbox">
+<summary><span class="count">${products.length} more products</span> <span class="sub">${esc(site.restIntro)}</span></summary>
 <ul class="rest">
 ${products.map((p) => `<li><h3>${esc(p.name)}</h3><p>${esc(p.what)}</p>${p.builtFor ? `<p class="built">Built for ${esc(p.builtFor)}</p>` : ""}<p class="links">${links(p)}</p></li>`).join("\n")}
 </ul>
+</details>
 </section>
 <section aria-labelledby="outside-h">
 <h2 id="outside-h">${esc(site.outsideHeading)}</h2>
