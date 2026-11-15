@@ -141,3 +141,14 @@ test("every product has a heading, and every code block is a labelled group", as
   const unlabelled = await page.locator("pre").evaluateAll((ps) => ps.filter((p) => p.getAttribute("role") !== "group" || !p.getAttribute("aria-label")).length);
   expect(unlabelled).toBe(0);
 });
+
+test("every state is reachable with ?state=", async ({ page }) => {
+  await page.goto("/?state=via");
+  await expect(page.locator("#via")).toContainText("Unstop application link");
+  await page.goto("/?state=open");
+  expect(await page.locator("li.clause details").evaluateAll((ds) => ds.every((d) => d.open))).toBe(true);
+  await page.goto("/?state=closed");
+  expect(await page.locator("li.clause details").evaluateAll((ds) => ds.every((d) => !d.open))).toBe(true);
+  await page.goto("/");
+  await expect(page.locator("#via")).toBeHidden();
+});
