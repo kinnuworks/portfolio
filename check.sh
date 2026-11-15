@@ -8,7 +8,7 @@ npm run build
 node --test test/                      # code matches GitHub at the pinned commit, numbers come from facts, answers confirmed
 npx playwright test                    # demo path at phone and laptop width, axe, 404, badge corner, reduced motion; records video
 node serve.mjs >/dev/null 2>&1 & srv=$!
-trap 'kill $srv 2>/dev/null' EXIT
+trap 'kill $srv 2>/dev/null || true' EXIT
 sleep 1
 node scripts/lighthouse.mjs            # mobile: performance >= 95, accessibility 100, best practices and SEO >= 95 (median of 3)
 node scripts/links.mjs                 # every outside link answers below 400
