@@ -101,12 +101,23 @@ ${body}
 `;
 }
 
+const heroFrom = featured.find((p) => p.heroLine);
+function heroProof(p) {
+  const line = readFileSync(join(root, "content", "code", `${p.cache}.full`), "utf8").split("\n")[p.heroLine - 1].trim();
+  const url = `https://github.com/kinnuworks/${p.repo}/blob/${p.sha}/${p.path}#L${p.heroLine}`;
+  return `<figure class="proof">
+<pre tabindex="0" aria-label="${esc(p.path)}, line ${p.heroLine}"><code><span class="ln hot"><span class="no" aria-hidden="true">${p.heroLine}</span>${esc(line)}</span></code></pre>
+<figcaption>${esc(p.heroCaption)} <a href="${url}">${esc(p.path)}, line ${p.heroLine}</a></figcaption>
+</figure>`;
+}
+
 const home = page({
   title: `${site.name}: AI that stops and asks`,
   description: site.intro,
   path: "/",
   body: `<section class="hero">
 <h1>${esc(site.hero)}</h1>
+${heroFrom ? heroProof(heroFrom) : ""}
 <p class="intro">${esc(site.intro)}</p>
 <p class="howto">${esc(site.howto)}</p>
 </section>
