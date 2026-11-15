@@ -120,3 +120,24 @@ test("a visitor from a ONEWHO application link is told what that link records", 
   await page.goto("/");
   expect(await page.locator("#via img").count()).toBe(0);
 });
+
+test("a link to one product opens it, even past the first three", async ({ page }) => {
+  const p = featured[6];
+  await page.goto(`/#${p.slug}`);
+  expect(await page.locator(`#${p.slug} details`).evaluate((d) => d.open)).toBe(true);
+  await page.goto(`/work/${p.slug}`);
+  await page.locator(".crumb a").click();
+  expect(await page.locator(`#${p.slug} details`).evaluate((d) => d.open)).toBe(true);
+});
+
+test("the 404 page is kept out of search results", async ({ page }) => {
+  await page.goto("/no-such-page");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex");
+});
+
+test("every product has a heading, and every code block is a labelled group", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator("li.clause summary h3")).toHaveCount(7);
+  const unlabelled = await page.locator("pre").evaluateAll((ps) => ps.filter((p) => p.getAttribute("role") !== "group" || !p.getAttribute("aria-label")).length);
+  expect(unlabelled).toBe(0);
+});
