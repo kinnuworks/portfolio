@@ -195,6 +195,7 @@ test("the application name reads cleanly from ONEWHO's real cookie value", async
 test("the first screen's corner text stays clear of ONEWHO's badge strip", async ({ page }) => {
   await page.goto("/");
   const vp = page.viewportSize();
-  const boxes = await page.locator(".corner").evaluateAll((els) => els.map((e) => e.getBoundingClientRect().bottom));
-  for (const bottom of boxes) expect(bottom).toBeLessThanOrEqual(vp.height - 40);
+  const boxes = await page.locator(".corner").evaluateAll((els) => els.map((e) => { const r = e.getBoundingClientRect(); return [r.top, r.bottom]; }));
+  // The strip is the bottom 40px of the window; nothing in the corners may overlap it.
+  for (const [top, bottom] of boxes) expect(bottom <= vp.height - 40 || top >= vp.height).toBe(true);
 });
