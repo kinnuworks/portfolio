@@ -43,5 +43,41 @@
   "footerBuilt": "Plain HTML and CSS, {kb} KB for all the pages together. This site loads no trackers and no fonts from another server; ONEWHO logs visits that come through application links.",
   "cornerLeft": "Data science at Simon Fraser University, AI engineer for clients in the US",
   "cornerRight": "30+ AI products shipped this year, every line pinned to a commit",
-  "ctaContact": "Get in touch"
+  "ctaContact": "Get in touch",
+  "introBig": "30+ AI products shipped at hackathons this year, on my own.",
+  "prizesHeading": "Where they placed",
+  "prizes": [
+    {
+      "place": "1st",
+      "where": "IIT Mandi, Lifeline"
+    },
+    {
+      "place": "1st",
+      "where": "Banana Hacks, Concord"
+    },
+    {
+      "place": "2nd",
+      "where": "CreateOS × Stripe, Polygraph"
+    },
+    {
+      "place": "2nd",
+      "where": "VelesHack, Sunflower"
+    },
+    {
+      "place": "3rd",
+      "where": "Qollab × IonQ, Legal Tender"
+    },
+    {
+      "place": "3rd",
+      "where": "HSK Horizon India, InvoiceGuard"
+    },
+    {
+      "place": "Won",
+      "where": "Open Agent Hackathon track, Nightlist"
+    },
+    {
+      "place": "Won",
+      "where": "Arc microgrant, Purse"
+    }
+  ]
 }

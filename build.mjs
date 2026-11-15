@@ -157,7 +157,9 @@ ${heroFrom ? heroProof(heroFrom) : ""}
 <p class="corner corner-r"><a href="https://github.com/kinnuworks">${esc(site.cornerRight)}</a></p>
 </section>
 <section class="lede" aria-label="About me">
-<p class="intro">${site.intro.split(" ").map((w) => `<span class="w">${esc(w)}</span>`).join(" ")}</p>
+<p class="intro">${site.introBig.split(" ").map((w) => `<span class="w">${esc(w)}</span>`).join(" ")}</p>
+<h2 class="prizes-h">${esc(site.prizesHeading)}</h2>
+<ul class="prizes">${site.prizes.map((z) => `<li><b>${esc(z.place)}</b><span>${esc(z.where)}</span></li>`).join("")}</ul>
 <p class="howto">${esc(site.howto)}</p>
 <p class="via" id="via" role="note" hidden></p>
 <script>(function(){try{var m=document.cookie.match(/(?:^|; )ow_a=([^;]+)/);if(/[?&]state=via\\b/.test(location.search))m=[0,"unstop"];if(!m)return;var a=decodeURIComponent(m[1]).replace(/[^\\p{L}\\p{N} ._-]/gu,"").replace(/[-_]+/g," ").trim();if(!a)return;a=a.charAt(0).toUpperCase()+a.slice(1);var el=document.getElementById("via");el.textContent=${JSON.stringify(site.via)}.replace("{app}",a);el.hidden=false;}catch(e){}})();</script>
