@@ -185,3 +185,16 @@ test("the device's status reads as plain English in every combination", async ({
   await gate.getByRole("button", { name: "Severe alert" }).click();
   await expect(status).toHaveText("Held: 1 named person approved, 2 needed.");
 });
+
+test("the application name reads cleanly from ONEWHO's real cookie value", async ({ page, context, baseURL }) => {
+  await context.addCookies([{ name: "ow_a", value: "unstop.e", url: baseURL }]);
+  await page.goto("/");
+  await expect(page.locator("#via")).toContainText("my Unstop application link");
+});
+
+test("the first screen's corner text stays clear of ONEWHO's badge strip", async ({ page }) => {
+  await page.goto("/");
+  const vp = page.viewportSize();
+  const boxes = await page.locator(".corner").evaluateAll((els) => els.map((e) => e.getBoundingClientRect().bottom));
+  for (const bottom of boxes) expect(bottom).toBeLessThanOrEqual(vp.height - 40);
+});
