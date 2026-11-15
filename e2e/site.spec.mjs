@@ -152,3 +152,22 @@ test("every state is reachable with ?state=", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("#via")).toBeHidden();
 });
+
+test("the hero device runs Nadhir's line 147: an AI approval never releases a severe alert", async ({ page }) => {
+  await page.goto("/");
+  const gate = page.locator(".gate");
+  const status = gate.locator(".gate-status");
+  await expect(gate).toBeVisible();
+  await expect(status).toContainText("Held");
+  await gate.getByRole("button", { name: "AI approves" }).click();
+  await expect(status).toContainText("Held");
+  await gate.getByRole("button", { name: "Person 1 approves" }).click();
+  await expect(status).toContainText("Held");
+  await gate.getByRole("button", { name: "Person 2 approves" }).click();
+  await expect(status).toContainText("Released");
+  await gate.getByRole("button", { name: "Person 2 approves" }).click();
+  await expect(status).toContainText("Held");
+  await gate.getByRole("button", { name: "Severe alert" }).click();
+  await expect(status).toContainText("Released");
+  await expect(gate.getByRole("button", { name: "Severe alert" })).toHaveAttribute("aria-pressed", "false");
+});
