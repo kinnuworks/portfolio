@@ -1,7 +1,7 @@
 {
   "name": "Dhiraj Kavuri",
   "first": "Dhiraj",
-  "hero": "Dhiraj Kavuri is one who builds AI that stops and asks.",
+  "hero": "Dhiraj Kavuri is one who builds AI with rules it can't break.",
   "intro": "I study data science at Simon Fraser University and build AI products for clients in the US. This year I shipped 30+ products at hackathons, on my own, and won prizes at 5 of them: 1st at IIT Mandi and Banana Hacks, 2nd at CreateOS × Stripe and VelesHack, 3rd at Qollab × IonQ. Since then InvoiceGuard, Nightlist and Purse have won prizes too.",
   "howto": "Each product below has one rule its AI can't get around. Open one to see the question I'd expect you to ask, my answer, and the lines of code that enforce the rule.",
   "featuredHeading": "What the AI doesn't get to decide",

@@ -1,4 +1,4 @@
-# Dhiraj Kavuri is one who builds AI that stops and asks
+# Dhiraj Kavuri is one who builds AI with rules it can't break
 
 My portfolio. Each featured product has one thing its AI is not allowed to decide, and the site shows the line of code that stops it, pinned to a commit.
 
