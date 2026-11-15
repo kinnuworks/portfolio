@@ -171,3 +171,17 @@ test("the hero device runs Nadhir's line 147: an AI approval never releases a se
   await expect(status).toContainText("Released");
   await expect(gate.getByRole("button", { name: "Severe alert" })).toHaveAttribute("aria-pressed", "false");
 });
+
+test("the device's status reads as plain English in every combination", async ({ page }) => {
+  await page.goto("/");
+  const gate = page.locator(".gate");
+  const status = gate.locator(".gate-status");
+  await gate.getByRole("button", { name: "Severe alert" }).click();
+  await gate.getByRole("button", { name: "Person 1 approves" }).click();
+  await gate.getByRole("button", { name: "Person 2 approves" }).click();
+  await expect(status).toHaveText("Released: 2 named people approved, 1 needed.");
+  await gate.getByRole("button", { name: "Person 2 approves" }).click();
+  await expect(status).toHaveText("Released: 1 named person approved, 1 needed.");
+  await gate.getByRole("button", { name: "Severe alert" }).click();
+  await expect(status).toHaveText("Held: 1 named person approved, 2 needed.");
+});
