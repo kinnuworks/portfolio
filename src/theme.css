@@ -43,9 +43,9 @@ body { font-family: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif; font
 main, .foot { max-width: none; padding: 0 32px; }
 .hero { position: relative; min-height: max(760px, 100vh); }
 .hero h1 { position: absolute; top: 34px; left: 59.5%; width: min(320px, 34vw); margin: 0; font-size: 18px; font-weight: 500; line-height: 1.2; letter-spacing: 0; z-index: 3; }
-.giant { display: block; position: absolute; left: 0; right: 0; bottom: 70px; font-weight: 500; font-size: min(24vw, 37vh); line-height: 0.8; letter-spacing: -0.035em; color: var(--ink); }
+.giant { display: block; position: absolute; left: 0; right: 0; bottom: 70px; font-weight: 500; font-size: min(20vw, 33vh); line-height: 0.8; letter-spacing: -0.035em; color: var(--ink); }
 .giant span { display: block; }
-.proof { position: absolute; z-index: 2; left: 12.5%; right: 12.5%; top: 28%; margin: 0; background: var(--dev); border-radius: 22px; padding: 18px; box-shadow: inset 1px 1px 1px rgb(255 255 255 / 0.12), inset -1px -1px 1px rgb(0 0 0 / 0.55), 0 3px 3px -1px rgb(0 0 0 / 0.6), 0 12px 24px -6px rgb(0 0 0 / 0.5), 0 50px 70px -20px rgb(0 0 0 / 0.45); }
+.proof { position: absolute; z-index: 2; left: 53%; right: 32px; top: 20%; margin: 0; background: var(--dev); border-radius: 22px; padding: 18px; box-shadow: inset 1px 1px 1px rgb(255 255 255 / 0.12), inset -1px -1px 1px rgb(0 0 0 / 0.55), 0 3px 3px -1px rgb(0 0 0 / 0.6), 0 12px 24px -6px rgb(0 0 0 / 0.5), 0 50px 70px -20px rgb(0 0 0 / 0.45); }
 .proof .chrome { display: flex; align-items: center; gap: 6px; padding: 2px 6px 12px; }
 .proof .chrome i { width: 10px; height: 10px; border-radius: 50%; background: #3a3a3f; box-shadow: inset 1px 1px 0 rgb(255 255 255 / 0.15); }
 .proof .chrome i:first-child { background: var(--orange); }
@@ -55,7 +55,7 @@ pre { font-family: "Fragment Mono", ui-monospace, monospace; font-size: 14px; ba
 .ln.hot { box-shadow: inset 3px 0 0 var(--orange); }
 .proof figcaption, .code figcaption { color: var(--dev-soft); font-size: 14px; padding: 12px 6px 2px; margin: 0; }
 .proof figcaption a, .code figcaption a { color: var(--dev-ink); }
-.corner { display: block; position: absolute; bottom: 24px; margin: 0; font-size: 18px; font-weight: 500; z-index: 3; }
+.corner { display: block; position: absolute; bottom: 24px; margin: 0; font-size: 18px; font-weight: 500; z-index: 3; max-width: 36%; line-height: 1.25; }
 .corner-l { left: 0; } .corner-r { left: 59.5%; }
 .corner a { color: var(--ink); }
 .lede { max-width: 1160px; margin: 160px 0 0; }
@@ -107,7 +107,7 @@ a { color: var(--ink); }
 .work > :not(h1) { max-width: 920px; }
 
 /* ---- The device: keys under the code run line 147's rule. ---- */
-.gate { margin: 14px 0 4px; display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; }
+.gate { margin: 14px 0 4px; display: grid; grid-template-columns: 1fr; gap: 12px; align-items: center; }
 .gate[hidden] { display: none; }
 .keys { display: flex; flex-wrap: wrap; gap: 8px; }
 .key { font: 500 14px/1 "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif; color: var(--dev-ink); background: #2a2a2e; border: 0; border-radius: 6px; padding: 11px 14px 11px 12px; display: inline-flex; align-items: center; gap: 9px; cursor: pointer;

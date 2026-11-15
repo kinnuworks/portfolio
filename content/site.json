@@ -41,7 +41,7 @@
   "colophonSource": "https://www.acadable.com/manifesto",
   "via": "You came in through my {app} application link. ONEWHO, the service behind this address, shows me which pages you open from that link, which is why each product has its own page.",
   "footerBuilt": "Plain HTML and CSS, {kb} KB for all the pages together. This site loads no trackers and no fonts from another server; ONEWHO logs visits that come through application links.",
-  "cornerLeft": "& shows the line of code",
-  "cornerRight": "Every line pinned to a commit on GitHub",
+  "cornerLeft": "Data science at Simon Fraser University, AI engineer for clients in the US",
+  "cornerRight": "30+ AI products shipped this year, every line pinned to a commit",
   "ctaContact": "Get in touch"
 }
